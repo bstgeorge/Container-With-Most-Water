@@ -1,0 +1,23 @@
+/**
+ * @param {number[]} height
+ * @return {number}
+ */
+var maxArea = function(height, maxVolume) {
+    maxVolume = maxVolume || 0;
+    // helper function
+    currentBin = height.shift();
+    for (let i = 0; i < height.length; i++) {
+      if (maxVolume > (currentBin * (height.length + 1))) {
+        break;
+      } else {
+        maxVolume = Math.max(maxVolume, Math.min(currentBin, height[i]) * (i + 1))
+      }
+    }
+
+    if (height.length !== 0) {
+      return maxArea(height, maxVolume);
+    }
+
+    //base case
+    return maxVolume;
+};
